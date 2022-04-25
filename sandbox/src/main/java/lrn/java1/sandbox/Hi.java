@@ -6,12 +6,12 @@ public class Hi {
     System.out.println("Hello," + somebody + "!");
   }
 
-  public static double area(double l) {
-    return l * l;
+  public static double area(Square s) {
+    return s.l * s.l;
   }
 
-  public static double area(double a, double b) {
-    return a * b;
+  public static double area(Rectangle r) {
+    return r.a * r.b;
   }
 
   public static void main(String[] args) {
@@ -19,12 +19,11 @@ public class Hi {
     hello("user");
     hello("Kirill");
 
-    double l = 5;
-    System.out.println("Ploshad kvadrata so storonoi " + l + " = " + area(l));
+    Square s = new Square(5);
+    System.out.println("Ploshad kvadrata so storonoi " + s.l + " = " + area(s));
 
-    double a = 5;
-    double b = 6;
-    System.out.println("Ploshad pryamougolnika so storonami " + a + " i " + b + " = " + area(a, b));
+    Rectangle r = new Rectangle(5,6);
+    System.out.println("Ploshad pryamougolnika so storonami " + r.a + " i " + r.b + " = " + area(r));
   }
 
 }
