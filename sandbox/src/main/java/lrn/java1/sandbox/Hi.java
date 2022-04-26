@@ -7,6 +7,7 @@ public class Hi {
   }
 
   public static double area(Rectangle r) {
+
     return r.a * r.b;
   }
 
@@ -18,7 +19,7 @@ public class Hi {
     Square s = new Square(5);
     System.out.println("Ploshad kvadrata so storonoi " + s.l + " = " + s.area());
 
-    Rectangle r = new Rectangle(5,6);
+    Rectangle r = new Rectangle(5, 6);
     System.out.println("Ploshad pryamougolnika so storonami " + r.a + " i " + r.b + " = " + area(r));
   }
 
