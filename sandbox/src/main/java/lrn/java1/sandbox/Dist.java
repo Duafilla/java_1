@@ -9,7 +9,7 @@ public class Dist {
 
 
       System.out.println("Расстояние между точками А(" + p1.x + ";" + p1.y + ") и В( " + p2.y + ";" +
-        p2.y + ") = " + p1.distance(p2));
+        p2.y + ") = " + p2.distance(p1));
 
     }
 }
