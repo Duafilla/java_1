@@ -5,10 +5,10 @@ public class Dist {
 
     public static void main(String[] args) {
       Point p1 = new Point(2, 3);
-      Point p2 = new Point(4, 5);
+      Point p2 = new Point(6, 5);
 
 
-      System.out.println("Расстояние между точками А(" + p1.x + ";" + p1.y + ") и В( " + p2.y + ";" +
+      System.out.println("Расстояние между точками А(" + p1.x + ";" + p1.y + ") и В( " + p2.x + ";" +
         p2.y + ") = " + p2.distance(p1));
 
     }
