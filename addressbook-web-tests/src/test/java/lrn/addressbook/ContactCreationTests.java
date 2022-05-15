@@ -9,6 +9,8 @@ import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
+import java.util.concurrent.TimeUnit;
+
 public class ContactCreationTests {
   private WebDriver wd;
 
@@ -16,6 +18,7 @@ public class ContactCreationTests {
   public void setUp() throws Exception {
     System.setProperty("webdriver.chrome.driver", "c:\\windows\\system32\\chromedriver.exe");
     wd = new ChromeDriver();
+    wd.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
     wd.get("http://localhost/addressbook/edit.php");
     login("admin", "secret");
   }
