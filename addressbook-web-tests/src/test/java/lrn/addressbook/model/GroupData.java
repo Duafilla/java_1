@@ -1,4 +1,4 @@
-package lrn.addressbook;
+package lrn.addressbook.model;
 
 public class GroupData {
     private final String name;

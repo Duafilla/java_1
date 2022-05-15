@@ -1,4 +1,4 @@
-package lrn.addressbook;
+package lrn.addressbook.model;
 
 public class ContactData {
     private final String firstname;
