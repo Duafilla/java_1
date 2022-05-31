@@ -34,6 +34,10 @@ public class ApplicationManager {
     System.setProperty("webdriver.chrome.driver", "c:\\windows\\system32\\chromedriver.exe");
     System.setProperty("webdriver.firefox.driver", "c:\\windows\\system32\\geckodriver.exe");
     System.setProperty("webdriver.MicrosoftEdge.driver", "c:\\windows\\system32\\msedgedriver.exe");
+    System.setProperty("webdriver.firefox.bin", "C:\\Program Files\\Mozilla Firefox\\firefox.exe");
+    EdgeOptions options = new EdgeOptions();
+    options.setBinary(new File("<path to edge>"));
+    driver = new EdgeDriver(options);
     wd.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
     wd.get("http://localhost/addressbook/");
     groupHelper = new GroupHelper(wd);
