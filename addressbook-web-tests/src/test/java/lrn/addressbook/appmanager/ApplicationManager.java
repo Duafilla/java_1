@@ -3,9 +3,11 @@ package lrn.addressbook.appmanager;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.edge.EdgeDriver;
+import org.openqa.selenium.edge.EdgeOptions;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.remote.BrowserType;
 
+import java.io.File;
 import java.util.concurrent.TimeUnit;
 
 public class ApplicationManager {
@@ -22,22 +24,27 @@ public class ApplicationManager {
   }
 
   public void init() {
+
+    System.setProperty("webdriver.chrome.driver", "c:\\windows\\system32\\chromedriver.exe");
+    System.setProperty("webdriver.firefox.driver", "c:\\windows\\system32\\geckodriver.exe");
+    System.setProperty("webdriver.MicrosoftEdge.driver", "c:\\windows\\system32\\msedgedriver.exe");
+
     if(browser == BrowserType.CHROME) {
       wd = new ChromeDriver();
     } else {
       if (browser == BrowserType.FIREFOX) {
+        System.setProperty("webdriver.firefox.bin", "C:\\Program Files\\Mozilla Firefox\\firefox.exe");
         wd = new FirefoxDriver();
       } else {
-        wd = new EdgeDriver();
+          EdgeOptions options = new EdgeOptions();
+          options.setBinary(new File("C:\\Windows\\SystemApps\\Microsoft.MicrosoftEdge_8wekyb3d8bbwe\\MicrosoftEdge.exe"));
+          wd = new EdgeDriver(options);
       }
     }
-    System.setProperty("webdriver.chrome.driver", "c:\\windows\\system32\\chromedriver.exe");
-    System.setProperty("webdriver.firefox.driver", "c:\\windows\\system32\\geckodriver.exe");
-    System.setProperty("webdriver.MicrosoftEdge.driver", "c:\\windows\\system32\\msedgedriver.exe");
-    System.setProperty("webdriver.firefox.bin", "C:\\Program Files\\Mozilla Firefox\\firefox.exe");
-    EdgeOptions options = new EdgeOptions();
-    options.setBinary(new File("<path to edge>"));
-    driver = new EdgeDriver(options);
+
+
+
+
     wd.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
     wd.get("http://localhost/addressbook/");
     groupHelper = new GroupHelper(wd);
