@@ -36,9 +36,14 @@ public class ApplicationManager {
         System.setProperty("webdriver.firefox.bin", "C:\\Program Files\\Mozilla Firefox\\firefox.exe");
         wd = new FirefoxDriver();
       } else {
-          EdgeOptions options = new EdgeOptions();
-          options.setBinary(new File("C:\\Windows\\SystemApps\\Microsoft.MicrosoftEdge_8wekyb3d8bbwe\\MicrosoftEdge.exe"));
-          wd = new EdgeDriver(options);
+        EdgeOptions options = new EdgeOptions();
+        options.addArguments("start-maximized");
+        options.addArguments("disable-infobars");
+        options.addArguments("--disable-extensions");
+        options.addArguments("--disable-gpu");
+        options.addArguments("--disable-dev-shm-usage");
+        options.setBinary(new File("C:\\Windows\\SystemApps\\Microsoft.MicrosoftEdge_8wekyb3d8bbwe\\MicrosoftEdge.exe"));
+        wd = new EdgeDriver(options);
       }
     }
 
