@@ -24,7 +24,6 @@ public class ApplicationManager {
 
     System.setProperty("webdriver.chrome.driver", "c:\\windows\\system32\\chromedriver.exe");
     System.setProperty("webdriver.firefox.driver", "c:\\windows\\system32\\geckodriver.exe");
-    System.setProperty("webdriver.MicrosoftEdge.driver", "c:\\windows\\system32\\msedgedriver.exe");
 
     if(browser == BrowserType.CHROME) {
       wd = new ChromeDriver();
