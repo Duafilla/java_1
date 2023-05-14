@@ -16,6 +16,7 @@ public class Hi {
 
     Rectangle r = new Rectangle(5, 6);
     System.out.println("Ploshad pryamougolnika so storonami " + r.a + " i " + r.b + " = " + r.area());
+
   }
 
 }
