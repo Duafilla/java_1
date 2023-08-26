@@ -23,7 +23,7 @@ public class ApplicationManager {
   public void init() {
 
     System.setProperty("webdriver.chrome.driver", "c:\\windows\\system32\\chromedriver.exe");
-    System.setProperty("webdriver.firefox.driver", "c:\\windows\\system32\\geckodriver.exe");
+    System.setProperty("webdriver.firefox.driver", "c:\\windows\\system32\\geckodriver.exe"); /*вообще можно эту строку удалить т.к. в else есть ссылка на драйвер*/
 
     if(browser == BrowserType.CHROME) {
       wd = new ChromeDriver();
