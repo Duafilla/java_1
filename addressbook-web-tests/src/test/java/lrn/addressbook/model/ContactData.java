@@ -10,14 +10,14 @@ public class ContactData {
     private final String email;
     private String group;
 
-    public ContactData(String firstname, String midname, String nick, String company, String address, String homePhoneNumber, String email, String group) {
+    public ContactData(String firstname, String midname, String nick, String address, String homePhoneNumber, String email, String company, String group) {
         this.firstname = firstname;
         this.midname = midname;
         this.nick = nick;
-        this.company = company;
         this.address = address;
         this.homePhoneNumber = homePhoneNumber;
         this.email = email;
+        this.company = company;
         this.group = group;
     }
 
