@@ -3,6 +3,8 @@ package lrn.addressbook.appmanager;
 import lrn.addressbook.model.ContactData;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.support.ui.Select;
+import org.testng.Assert;
 
 public class ContactHelper extends HelperBase {
 
@@ -15,8 +17,7 @@ public class ContactHelper extends HelperBase {
     click(By.xpath("//div[@id='content']/form/input[21]"));
   }
 
-  public void fillContactForm(
-    ContactData contactData) {
+  public void fillContactForm(ContactData contactData, boolean creation) {
     type(By.name("firstname"), contactData.getFirstname());
     type(By.name("middlename"), contactData.getMidname());
     type(By.name("nickname"), contactData.getNick());
@@ -24,6 +25,19 @@ public class ContactHelper extends HelperBase {
     type(By.name("home"), contactData.getHomePhoneNumber());
     type(By.name("email2"), contactData.getEmail());
     type(By.name("company"), contactData.getCompany());
+
+    if (creation) {
+      try {
+        new Select(wd.findElement(By.name("new_group"))).selectByVisibleText(contactData.getGroup());
+      }
+      catch (NullPointerException e) {
+        System.out.println("Vveli huinyu");
+        e.printStackTrace();
+      }
+    }
+    else {
+      Assert.assertFalse(isElementPresent(By.name("new_group")));
+    }
   }
 
   public void initContactModification() {
