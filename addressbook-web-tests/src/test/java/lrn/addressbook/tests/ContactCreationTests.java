@@ -10,7 +10,7 @@ public class ContactCreationTests extends TestBase{
 
     app.getNavigationHelper().goToContactForm();
     app.getContactHelper().fillContactForm(new ContactData("qwerty", "qwerty",
-            "qwerty", "11111", "111111", "111111", "222222ddddd", "111"), true);
+            "qwerty", "11111", "111111", "111111", "222222ddddd", "qwerty"), true);
     app.getContactHelper().submitContactCreation();
     app.getNavigationHelper().goToHomePage();
   }
