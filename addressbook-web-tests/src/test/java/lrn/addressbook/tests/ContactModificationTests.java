@@ -13,7 +13,7 @@ public class ContactModificationTests extends TestBase{
     app.getContactHelper().fillContactForm(new ContactData("www", "www", "2222", "121ddd", "fff",
             "222", "qw", null),false);
     app.getContactHelper().updateContact();
-    app.getNavigationHelper().returnHomepage();
+    app.getNavigationHelper().goToHomePage();
   }
 }
 
