@@ -14,19 +14,12 @@ public class GroupCreationTests extends TestBase {
 
     app.getNavigationHelper().goToGroupPage();
     List<GroupData> before = app.getGroupHelper().getGroupList();
-    GroupData groupData = new GroupData("111", "111", "111");
+    GroupData groupData = new GroupData("112", "111", "111");
     app.getGroupHelper().createGroup(groupData);
     List<GroupData> after = app.getGroupHelper().getGroupList();
     Assert.assertEquals(after.size(), before.size() + 1);
 
-    int maxId = 0;
-    for (GroupData group:after) {
-      int current = group.getId();
-      if (maxId < current) {
-        maxId = current;
-      }
-    }
-    groupData.setId(maxId);
+    groupData.setId(after.stream().max((o1, o2) -> Integer.compare(o1.getId(),o2.getId())).get().getId());
     before.add(groupData);
     Assert.assertEquals(new HashSet<>(after), new HashSet<>(before));
   }
