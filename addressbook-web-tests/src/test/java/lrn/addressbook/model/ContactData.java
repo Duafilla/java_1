@@ -21,6 +21,7 @@ public class ContactData {
         this.group = group;
     }
 
+
     public String getFirstname() {
         return firstname;
     }
@@ -52,4 +53,20 @@ public class ContactData {
     public String getGroup() {
         return group;
     }
+
+    @Override
+    public String toString() {
+        return "ContactData{" +
+                "firstname='" + firstname + '\'' +
+                ", lastName='" + lastName + '\'' +
+                ", nick='" + nick + '\'' +
+                ", company='" + company + '\'' +
+                ", address='" + address + '\'' +
+                ", homePhoneNumber='" + homePhoneNumber + '\'' +
+                ", email='" + email + '\'' +
+                ", group='" + group + '\'' +
+                '}';
+    }
+
+
 }
