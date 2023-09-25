@@ -2,7 +2,7 @@ package lrn.addressbook.model;
 
 public class ContactData {
     private final String firstname;
-    private final String midname;
+    private final String lastName;
     private final String nick;
     private final String company;
     private final String address;
@@ -10,9 +10,9 @@ public class ContactData {
     private final String email;
     private String group;
 
-    public ContactData(String firstname, String midname, String nick, String address, String homePhoneNumber, String email, String company, String group) {
+    public ContactData(String firstname, String lastName, String nick, String address, String homePhoneNumber, String email, String company, String group) {
         this.firstname = firstname;
-        this.midname = midname;
+        this.lastName = lastName;
         this.nick = nick;
         this.address = address;
         this.homePhoneNumber = homePhoneNumber;
@@ -25,8 +25,8 @@ public class ContactData {
         return firstname;
     }
 
-    public String getMidname() {
-        return midname;
+    public String getLastName() {
+        return lastName;
     }
 
     public String getNick() {
