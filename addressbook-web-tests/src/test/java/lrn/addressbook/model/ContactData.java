@@ -1,6 +1,10 @@
 package lrn.addressbook.model;
 
+import java.util.Objects;
+
 public class ContactData {
+
+    private final int id;
     private final String firstname;
     private final String lastName;
     private final String nick;
@@ -10,7 +14,20 @@ public class ContactData {
     private final String email;
     private String group;
 
-    public ContactData(String firstname, String lastName, String nick, String address, String homePhoneNumber, String email, String company, String group) {
+    public ContactData(String firstname, String lastName, String nick, String company, String address, String homePhoneNumber, String email, String group) {
+        this.id = Integer.MAX_VALUE;
+        this.firstname = firstname;
+        this.lastName = lastName;
+        this.nick = nick;
+        this.company = company;
+        this.address = address;
+        this.homePhoneNumber = homePhoneNumber;
+        this.email = email;
+        this.group = group;
+    }
+
+    public ContactData(int id, String firstname, String lastName, String nick, String address, String homePhoneNumber, String email, String company, String group) {
+        this.id = id;
         this.firstname = firstname;
         this.lastName = lastName;
         this.nick = nick;
@@ -54,10 +71,16 @@ public class ContactData {
         return group;
     }
 
+    public int getId() {
+        return id;
+    }
+
+
     @Override
     public String toString() {
         return "ContactData{" +
-                "firstname='" + firstname + '\'' +
+                "id=" + id +
+                ", firstname='" + firstname + '\'' +
                 ", lastName='" + lastName + '\'' +
                 ", nick='" + nick + '\'' +
                 ", company='" + company + '\'' +
@@ -68,5 +91,16 @@ public class ContactData {
                 '}';
     }
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        ContactData that = (ContactData) o;
+        return Objects.equals(firstname, that.firstname) && Objects.equals(lastName, that.lastName);
+    }
 
+    @Override
+    public int hashCode() {
+        return Objects.hash(firstname, lastName);
+    }
 }

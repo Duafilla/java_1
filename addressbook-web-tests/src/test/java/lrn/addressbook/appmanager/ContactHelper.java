@@ -23,7 +23,7 @@ public class ContactHelper extends HelperBase {
 
   public void fillContactForm(ContactData contactData, boolean creation) {
     type(By.name("firstname"), contactData.getFirstname());
-    type(By.name("middlename"), contactData.getLastName());
+    type(By.name("lastname"), contactData.getLastName());
     type(By.name("nickname"), contactData.getNick());
     type(By.name("address"), contactData.getAddress());
     type(By.name("home"), contactData.getHomePhoneNumber());
@@ -73,10 +73,12 @@ public class ContactHelper extends HelperBase {
     List<WebElement> tableRows = baseTable.findElements(By.cssSelector("tr"));
     tableRows.remove(0);
     for (WebElement element:tableRows) {
-      List<WebElement> elements = element.findElements(By.tagName("tg"));
-      String name = elements.get(1).getText();
-      String lastName = elements.get(2).getText();
-      ContactData contact = new ContactData(name,lastName,null,null,null,null,null,null);
+      List<WebElement> elements = element.findElements(By.tagName("td"));
+      String idS = element.findElement(By.tagName("input")).getAttribute("id");
+      int id = Integer.parseInt(idS);
+      String lastName = elements.get(1).getText();
+      String firstName = elements.get(2).getText();
+      ContactData contact = new ContactData(id,firstName,lastName,null,null,null,null,null,null);
       contacts.add(contact);
     }
     return contacts;
