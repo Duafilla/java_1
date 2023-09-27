@@ -51,4 +51,11 @@ public class HelperBase {
       return false;
     }
   }
+  public void pause(long mS) {
+    try {
+      Thread.sleep(mS);
+    } catch (InterruptedException e) {
+      throw new RuntimeException(e);
+    }
+  }
 }
