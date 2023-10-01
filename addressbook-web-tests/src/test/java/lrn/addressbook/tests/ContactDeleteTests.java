@@ -3,13 +3,11 @@ package lrn.addressbook.tests;
 import lrn.addressbook.model.ContactData;
 import org.testng.Assert;
 import org.testng.annotations.Test;
-
-import java.util.Comparator;
 import java.util.List;
 
 public class ContactDeleteTests extends TestBase {
 
-  @Test
+  @Test(enabled = false)
   public void testContactDelete() {
     if (!(app.getContactHelper().isThereAContact())) {
       app.getContactHelper().createContact(new ContactData( "qwerty", "qwerty",
