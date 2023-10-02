@@ -3,9 +3,7 @@ package lrn.addressbook.tests;
 import lrn.addressbook.model.GroupData;
 import org.testng.Assert;
 import org.testng.annotations.Test;
-
-import java.util.Comparator;
-import java.util.List;
+import java.util.Set;
 
 public class GroupCreationTests extends TestBase {
 
@@ -13,16 +11,14 @@ public class GroupCreationTests extends TestBase {
   public void testGroupCreation() throws Exception {
 
     app.goTo().groupPage();
-    List<GroupData> before = app.group().list();
+    Set<GroupData> before = app.group().all();
     GroupData groupData = new GroupData("112", "111", "111");
     app.group().create(groupData);
-    List<GroupData> after = app.group().list();
+    Set<GroupData> after = app.group().all();
     Assert.assertEquals(after.size(), before.size() + 1);
 
+    groupData.setId(after.stream().mapToInt((GroupData::getId)).max().getAsInt());
     before.add(groupData);
-    Comparator<GroupData> comparatorById = Comparator.comparingInt(GroupData::getId);
-    before.sort(comparatorById);
-    after.sort(comparatorById);
     Assert.assertEquals(before, after);
 
   }
