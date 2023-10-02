@@ -22,7 +22,7 @@ public class ContactModificationTests extends TestBase{
     ContactData contactData = new ContactData(before.get(0).getId(), "www", "www", "2222", "121ddd", "fff", "222", "qw", null);
     app.getContactHelper().fillContactForm(contactData,false);
     app.getContactHelper().updateContact();
-    app.getNavigationHelper().goToHomePage();
+    app.goTo().goToHomePage();
     List<ContactData> after = app.getContactHelper().getContactList();
     Assert.assertEquals(before.size(),after.size());
 
