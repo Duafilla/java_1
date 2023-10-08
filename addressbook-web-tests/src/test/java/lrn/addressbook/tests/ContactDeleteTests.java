@@ -3,25 +3,24 @@ package lrn.addressbook.tests;
 import lrn.addressbook.model.ContactData;
 import org.testng.Assert;
 import org.testng.annotations.Test;
-import java.util.List;
+import java.util.Set;
 
 public class ContactDeleteTests extends TestBase {
 
-  @Test(enabled = false)
+  @Test
   public void testContactDelete() {
-    if (!(app.getContactHelper().isThereAContact())) {
-      app.getContactHelper().createContact(new ContactData( "qwerty", "qwerty",
-              "qwerty", "11111", "111111", "111111", "222222ddddd", "qwerty"), true);
+    if (!(app.contact().isThereAContact())) {
+      app.contact().createContact(new ContactData( "qwerty", "qwerty",
+              "qwerty", "11111", "111111", "111111","222", "333", "222222ddddd", "qwerty"));
     }
-    List<ContactData> before = app.getContactHelper().getContactList();
-    app.getContactHelper().selectContact();
-    app.getContactHelper().deleteContact();
-    app.getContactHelper().submitDeleteContact();
-    app.getContactHelper().pause(5000);
-    List<ContactData> after = app.getContactHelper().getContactList();
-    Assert.assertEquals(before.size() - 1,after.size());
 
-    before.remove(0);
+    Set<ContactData> before = app.contact().all();
+    ContactData deletedContact = before.iterator().next();
+    app.contact().delete(deletedContact);
+    Assert.assertEquals(before.size() - 1,app.contact().getContactCount());
+
+    Set<ContactData> after = app.contact().all();
+    before.remove(deletedContact);
     Assert.assertEquals(before,after);
 
 

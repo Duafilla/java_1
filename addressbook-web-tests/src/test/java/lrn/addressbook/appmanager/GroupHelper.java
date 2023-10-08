@@ -10,6 +10,9 @@ import java.util.Set;
 
 public class GroupHelper extends HelperBase {
 
+  private Set<GroupData> groupCache = null;
+  private Set<GroupData> copyGroupCache = groupCache;
+
   public GroupHelper(WebDriver wd) {
     super(wd);
   }
@@ -42,7 +45,7 @@ public class GroupHelper extends HelperBase {
     wd.findElement(By.cssSelector("input[value='" + id + "']")).click();
   }
 
-  public void initGroupModificatin() {
+  public void initGroupModification() {
     click(By.name("edit"));
   }
 
@@ -77,15 +80,13 @@ public class GroupHelper extends HelperBase {
 
   public void modify(GroupData groupData) {
     selectGroupById(groupData.getId());
-    initGroupModificatin();
+    initGroupModification();
     fillGroupForm(groupData);
     updateGroup();
     groupCache = null;
     returnToGroupPage();
   }
 
-  private Set<GroupData> groupCache = null;
-  private Set<GroupData> copyGroupCache = groupCache;
 
   public Set<GroupData> all() {
     if (groupCache != null) {

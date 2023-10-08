@@ -3,29 +3,23 @@ package lrn.addressbook.tests;
 import lrn.addressbook.model.ContactData;
 import org.testng.Assert;
 import org.testng.annotations.Test;
-
-import java.util.Comparator;
-import java.util.List;
+import java.util.Set;
 
 public class ContactCreationTests extends TestBase{
 
-  @Test(enabled = false)
+  @Test
   public void testContactCreation() throws Exception {
 
-    List<ContactData> before = app.getContactHelper().getContactList();
+    Set<ContactData> before = app.contact().all();
     app.goTo().goToContactForm();
     ContactData contactData = new ContactData( "qwerty", "qwerty",
-            "qwerty", "11111", "111111", "111111", "222222ddddd", "qwerty");
-    app.getContactHelper().fillContactForm(contactData,true);
-    app.getContactHelper().submitContactCreation();
-    app.goTo().goToHomePage();
-    List<ContactData> after = app.getContactHelper().getContactList();
-    Assert.assertEquals(before.size() + 1,after.size());
+            "qwerty", "11111", "111111", "111111", "222", "333", "222222ddddd", "qwerty");
+    app.contact().createContact(contactData);
+    Assert.assertEquals(before.size() + 1,app.contact().getContactCount());
 
+    Set<ContactData> after = app.contact().all();
+    contactData.setId(after.stream().mapToInt((ContactData::getId)).max().getAsInt());
     before.add(contactData);
-    Comparator<ContactData> comparator = Comparator.comparing(ContactData::getId);
-    before.sort(comparator);
-    after.sort(comparator);
     Assert.assertEquals(before,after);
   }
 
