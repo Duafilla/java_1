@@ -4,11 +4,7 @@ import lrn.addressbook.model.ContactData;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
-import java.util.ArrayList;
-import java.util.Comparator;
-import java.util.List;
 import java.util.Set;
-import java.util.stream.Collectors;
 
 public class ContactModificationTests extends TestBase{
 
@@ -17,7 +13,7 @@ public class ContactModificationTests extends TestBase{
   public void testContactModification() {
 
     if (!(app.contact().isThereAContact())) {
-      app.contact().createContact(new ContactData( "qwerty", "qwerty",
+      app.contact().create(new ContactData( "qwerty", "qwerty",
               "qwerty", "11111", "111111", "111111","222", "333", "222222ddddd", "qwerty"));
     }
 

@@ -14,7 +14,7 @@ public class ContactCreationTests extends TestBase{
     app.goTo().goToContactForm();
     ContactData contactData = new ContactData( "qwerty", "qwerty",
             "qwerty", "11111", "111111", "111111", "222", "333", "222222ddddd", "qwerty");
-    app.contact().createContact(contactData);
+    app.contact().create(contactData);
     Assert.assertEquals(before.size() + 1,app.contact().getContactCount());
 
     Set<ContactData> after = app.contact().all();

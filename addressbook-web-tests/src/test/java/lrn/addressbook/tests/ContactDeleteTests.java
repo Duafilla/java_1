@@ -10,7 +10,7 @@ public class ContactDeleteTests extends TestBase {
   @Test
   public void testContactDelete() {
     if (!(app.contact().isThereAContact())) {
-      app.contact().createContact(new ContactData( "qwerty", "qwerty",
+      app.contact().create(new ContactData( "qwerty", "qwerty",
               "qwerty", "11111", "111111", "111111","222", "333", "222222ddddd", "qwerty"));
     }
 
