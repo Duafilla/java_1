@@ -47,7 +47,7 @@ public class ContactHelper extends HelperBase {
       String idS = element.findElement(By.tagName("input")).getAttribute("id");
       if (id.equals(idS)) {
         List<WebElement> elements = element.findElements(By.tagName("td"));
-        elements.get(7).click();
+        elements.get(7).findElement(By.tagName("a")).click();
         break;
       }
     }

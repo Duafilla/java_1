@@ -17,9 +17,10 @@ public class ContactModificationTests extends TestBase{
               "qwerty", "11111", "111111", "111111","222", "333", "222222ddddd", "qwerty"));
     }
 
+    app.goTo().goToHomePage();
     Set<ContactData> before = app.contact().all();
     ContactData modifiedContact = before.iterator().next();
-    ContactData contactData = new ContactData(modifiedContact.getId(), "EEE", "www", "2222", "121ddd", "fff",
+    ContactData contactData = new ContactData(modifiedContact.getId(), "EEE", "www", "2222", "121ddd", "666",
             "222", "333", "222", "qw", null);
     app.contact().modify(contactData);
     Assert.assertEquals(before.size(),app.contact().getContactCount());

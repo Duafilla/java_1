@@ -10,6 +10,7 @@ public class ContactCreationTests extends TestBase{
   @Test
   public void testContactCreation() throws Exception {
 
+    app.goTo().goToHomePage();
     Set<ContactData> before = app.contact().all();
     app.goTo().goToContactForm();
     ContactData contactData = new ContactData( "qwerty", "qwerty",

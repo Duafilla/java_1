@@ -14,6 +14,7 @@ public class ContactDeleteTests extends TestBase {
               "qwerty", "11111", "111111", "111111","222", "333", "222222ddddd", "qwerty"));
     }
 
+    app.goTo().goToHomePage();
     Set<ContactData> before = app.contact().all();
     ContactData deletedContact = before.iterator().next();
     app.contact().delete(deletedContact);
