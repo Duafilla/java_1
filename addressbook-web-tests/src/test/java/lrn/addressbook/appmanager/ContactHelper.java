@@ -108,15 +108,12 @@ public class ContactHelper extends HelperBase {
       return copyContactCache;
     }
     Set<ContactData> contactCache = new HashSet<>();
-    WebElement baseTable = wd.findElement(By.id("maintable"));
-    List<WebElement> tableRows = baseTable.findElements(By.cssSelector("tr"));
-    tableRows.remove(0);
+    List<WebElement> tableRows = wd.findElements(By.xpath("//*/tbody/tr[@name='entry']"));
     for (WebElement element:tableRows) {
-      List<WebElement> elements = element.findElements(By.tagName("td"));
-      String idS = element.findElement(By.tagName("input")).getAttribute("id");
-      int id = Integer.parseInt(idS);
-      String lastName = elements.get(1).getText();
-      String firstName = elements.get(2).getText();
+      String string = element.findElement(By.cssSelector("input[type='checkbox']")).getAttribute("id");
+      int id = Integer.parseInt(string);
+      String lastName = element.findElement(By.cssSelector("td:nth-child(2)")).getText();
+      String firstName = element.findElement(By.cssSelector("td:nth-child(3)")).getText();
       ContactData contact = new ContactData(id,firstName,lastName,null,null,null,null,
               null,null,null,null);
       contactCache.add(contact);
