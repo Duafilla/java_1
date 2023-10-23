@@ -1,7 +1,9 @@
 package lrn.addressbook.tests;
 
 import lrn.addressbook.model.ContactData;
+import org.testng.Assert;
 import org.testng.annotations.Test;
+
 
 public class ContactPhoneTests extends TestBase {
     @Test
@@ -14,5 +16,13 @@ public class ContactPhoneTests extends TestBase {
         app.goTo().goToHomePage();
         ContactData contactData = app.contact().all().iterator().next();
         ContactData contactInfoFromEditForm = app.contact().InfoFromEditForm(contactData);
+
+        Assert.assertEquals(contactData.getHomePhoneNumber(), cleaned(contactInfoFromEditForm.getHomePhoneNumber()));
+        Assert.assertEquals(contactData.getMobilePhoneNumber(),cleaned(contactInfoFromEditForm.getMobilePhoneNumber()));
+        Assert.assertEquals(contactData.getWorkPhoneNumber(),cleaned(contactInfoFromEditForm.getWorkPhoneNumber()));
+    }
+
+    public String cleaned(String phone) {
+        return phone.replaceAll("\\s", "").replaceAll("[-()]", "");
     }
 }
