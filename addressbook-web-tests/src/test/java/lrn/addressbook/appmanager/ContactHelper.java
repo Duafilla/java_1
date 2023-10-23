@@ -53,6 +53,18 @@ public class ContactHelper extends HelperBase {
     }
   }
 
+  public ContactData InfoFromEditForm(ContactData contactData) {
+    initContactModification(contactData);
+    String firstname = wd.findElement(By.name("firstname")).getAttribute("value");
+    String lastname = wd.findElement(By.name("lastname")).getAttribute("value");
+    String home = wd.findElement(By.name("home")).getAttribute("value");
+    String mobile = wd.findElement(By.name("mobile")).getAttribute("value");
+    String work = wd.findElement(By.name("work")).getAttribute("value");
+    wd.navigate().back();
+    return new ContactData(contactData.getId(),firstname,lastname, contactData.getNick(), contactData.getAddress(), home, mobile, work, contactData.getEmail(),
+            contactData.getCompany(), contactData.getGroup());
+  }
+
   public int getContactCount() {
     return  wd.findElements(By.name("selected[]")).size();
   }
