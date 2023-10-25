@@ -128,8 +128,21 @@ public class ContactHelper extends HelperBase {
       String firstName = element.findElement(By.cssSelector("td:nth-child(3)")).getText();
       String allPhones = element.findElement(By.cssSelector("td:nth-child(6)")).getText();
       String[] phones = allPhones.split("\n");
-      ContactData contact = new ContactData(id,firstName,lastName,null,null,phones[0],phones[1],
-              phones[2],null,null,null);
+      ContactData contact;
+      switch (phones.length) {
+        case 1: contact = new ContactData(id,firstName,lastName,null,null,phones[0],null,
+                null,null,null,null);
+          break;
+        case 2: contact = new ContactData(id,firstName,lastName,null,null,phones[0],phones[1],
+                null,null,null,null);
+          break;
+        case 3: contact = new ContactData(id,firstName,lastName,null,null,phones[0],phones[1],
+                phones[2],null,null,null);
+          break;
+        default: contact = new ContactData(id,firstName,lastName,null,null,null,null,
+                null,null,null,null);
+      }
+
       contactCache.add(contact);
     }
     return copyContactCache = contactCache;
