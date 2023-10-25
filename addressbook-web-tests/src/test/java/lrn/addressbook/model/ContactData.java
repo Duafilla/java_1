@@ -1,5 +1,6 @@
 package lrn.addressbook.model;
 
+import java.io.File;
 import java.util.Objects;
 
 public class ContactData {
@@ -15,6 +16,16 @@ public class ContactData {
     private final String workPhoneNumber;
     private final String email;
     private String group;
+
+    public File getPhoto() {
+        return photo;
+    }
+
+    public void setPhoto(File photo) {
+        this.photo = photo;
+    }
+
+    private File photo;
 
 
     public ContactData(String firstname, String lastName, String nick, String company, String address, String homePhoneNumber, String mobilePhoneNumber,
@@ -35,6 +46,21 @@ public class ContactData {
     public ContactData(int id, String firstname, String lastName, String nick, String address, String homePhoneNumber, String mobilePhoneNumber,
                        String workPhoneNumber, String email, String company, String group) {
         this.id = id;
+        this.firstname = firstname;
+        this.lastName = lastName;
+        this.nick = nick;
+        this.address = address;
+        this.homePhoneNumber = homePhoneNumber;
+        this.mobilePhoneNumber = mobilePhoneNumber;
+        this.workPhoneNumber = workPhoneNumber;
+        this.email = email;
+        this.company = company;
+        this.group = group;
+    }
+
+    public ContactData(File photo, String firstname, String lastName, String nick, String address, String homePhoneNumber, String mobilePhoneNumber,
+                       String workPhoneNumber, String email, String company, String group) {
+        this.photo = photo;
         this.firstname = firstname;
         this.lastName = lastName;
         this.nick = nick;

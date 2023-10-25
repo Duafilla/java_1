@@ -3,6 +3,8 @@ package lrn.addressbook.tests;
 import lrn.addressbook.model.ContactData;
 import org.testng.Assert;
 import org.testng.annotations.Test;
+
+import java.io.File;
 import java.util.Set;
 
 public class ContactCreationTests extends TestBase{
@@ -13,7 +15,8 @@ public class ContactCreationTests extends TestBase{
     app.goTo().goToHomePage();
     Set<ContactData> before = app.contact().all();
     app.goTo().goToContactForm();
-    ContactData contactData = new ContactData( "qwerty", "qwerty",
+    File photo = new File("src/test/resources/pic.jpg");
+    ContactData contactData = new ContactData(photo, "qwerty", "qwerty",
             "qwerty", "11111", "111111", "111111", "222", "333", "222222ddddd", "qwerty");
     app.contact().create(contactData);
     Assert.assertEquals(before.size() + 1,app.contact().getContactCount());
