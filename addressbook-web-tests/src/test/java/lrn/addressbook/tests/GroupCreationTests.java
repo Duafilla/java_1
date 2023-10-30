@@ -1,5 +1,6 @@
 package lrn.addressbook.tests;
 
+import com.thoughtworks.xstream.XStream;
 import lrn.addressbook.model.GroupData;
 import org.testng.Assert;
 import org.testng.annotations.DataProvider;
@@ -12,20 +13,24 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 public class GroupCreationTests extends TestBase {
 
   @DataProvider
   public Iterator<Object[]> validGroups() throws IOException {
-    List<Object[]> list = new ArrayList<>();
-    BufferedReader reader = new BufferedReader(new FileReader("src/test/resources/groups.csv"));
+    BufferedReader reader = new BufferedReader(new FileReader("src/test/resources/groups.xml"));
+    String xml = "";
     String line = reader.readLine();
     while (line != null) {
-      String[] split = line.split(";");
-      list.add(new Object[]{new GroupData(split[0], split[1], split[2])});
+      xml += line;
       line = reader.readLine();
     }
-    return list.iterator();
+    reader.close();
+    XStream xStream = new XStream();
+    xStream.processAnnotations(GroupData.class);
+    List<GroupData> groups = (List<GroupData>) xStream.toXML(xml);
+    return groups.stream().map((groupData -> new Object[] {groupData})).collect(Collectors.toList()).iterator();
   }
 
   @Test(dataProvider = "validGroups")

@@ -8,4 +8,5 @@ dependencies {
   implementation 'org.testng:testng:7.5'
   implementation 'org.seleniumhq.selenium:selenium-java:4.1.4'
   implementation group: 'com.beust', name: 'jcommander', version: '1.82'
+  implementation group: 'com.thoughtworks.xstream', name: 'xstream', version: '1.4.20'
 }
