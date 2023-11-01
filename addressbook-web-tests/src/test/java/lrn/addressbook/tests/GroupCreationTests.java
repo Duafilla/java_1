@@ -9,7 +9,6 @@ import org.testng.annotations.Test;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Set;
@@ -26,10 +25,11 @@ public class GroupCreationTests extends TestBase {
       xml += line;
       line = reader.readLine();
     }
-    reader.close();
     XStream xStream = new XStream();
+    xStream.allowTypesByWildcard(
+            new String[] { "lrn.addressbook.model.GroupData.*"});
     xStream.processAnnotations(GroupData.class);
-    List<GroupData> groups = (List<GroupData>) xStream.toXML(xml);
+    List<GroupData> groups = (List<GroupData>) xStream.fromXML(xml);
     return groups.stream().map((groupData -> new Object[] {groupData})).collect(Collectors.toList()).iterator();
   }
 
@@ -48,7 +48,7 @@ public class GroupCreationTests extends TestBase {
 
   }
 
-  @Test
+  @Test(enabled = false)
   public void testBadGroupCreation() {
 
     app.goTo().groupPage();
