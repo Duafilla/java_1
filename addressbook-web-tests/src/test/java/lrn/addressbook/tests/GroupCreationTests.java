@@ -1,6 +1,7 @@
 package lrn.addressbook.tests;
 
 import com.thoughtworks.xstream.XStream;
+import com.thoughtworks.xstream.security.AnyTypePermission;
 import lrn.addressbook.model.GroupData;
 import org.testng.Assert;
 import org.testng.annotations.DataProvider;
@@ -26,8 +27,7 @@ public class GroupCreationTests extends TestBase {
       line = reader.readLine();
     }
     XStream xStream = new XStream();
-    xStream.allowTypesByWildcard(
-            new String[] { "lrn.addressbook.model.GroupData.*"});
+    xStream.addPermission(AnyTypePermission.ANY);
     xStream.processAnnotations(GroupData.class);
     List<GroupData> groups = (List<GroupData>) xStream.fromXML(xml);
     return groups.stream().map((groupData -> new Object[] {groupData})).collect(Collectors.toList()).iterator();
@@ -48,7 +48,7 @@ public class GroupCreationTests extends TestBase {
 
   }
 
-  @Test(enabled = false)
+  @Test
   public void testBadGroupCreation() {
 
     app.goTo().groupPage();
