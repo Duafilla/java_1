@@ -6,6 +6,8 @@ import com.google.gson.reflect.TypeToken;
 import com.thoughtworks.xstream.XStream;
 import com.thoughtworks.xstream.security.AnyTypePermission;
 import lrn.addressbook.model.GroupData;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.testng.Assert;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
@@ -19,6 +21,8 @@ import java.util.Set;
 import java.util.stream.Collectors;
 
 public class GroupCreationTests extends TestBase {
+
+  Logger logger = LoggerFactory.getLogger(GroupCreationTests.class);
 
   @DataProvider
   public Iterator<Object[]> validGroupsFromXml() throws IOException {
@@ -55,6 +59,7 @@ public class GroupCreationTests extends TestBase {
   @Test(dataProvider = "validGroupsFromJson")
   public void testGroupCreation(GroupData groupData) {
 
+    logger.info("Start test testGroupCreation");
     app.goTo().groupPage();
     Set<GroupData> before = app.group().all();
     app.group().create(groupData);
@@ -64,6 +69,7 @@ public class GroupCreationTests extends TestBase {
     groupData.setId(after.stream().mapToInt((GroupData::getId)).max().getAsInt());
     before.add(groupData);
     Assert.assertEquals(before, after);
+    logger.info("Stop test testGroupCreation");
 
   }
 
