@@ -47,6 +47,12 @@ public class GroupData {
         this.footer = footer;
     }
 
+    public GroupData() {
+        name = "";
+        header = "";
+        footer = "";
+    }
+
     public int getId() {
         return id;
     }
