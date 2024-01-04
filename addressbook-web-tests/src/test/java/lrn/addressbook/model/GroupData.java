@@ -48,9 +48,9 @@ public class GroupData {
     }
 
     public GroupData() {
-        name = "";
-        header = "";
-        footer = "";
+        this.name = "";
+        this.header = "";
+        this.footer = "";
     }
 
     public int getId() {

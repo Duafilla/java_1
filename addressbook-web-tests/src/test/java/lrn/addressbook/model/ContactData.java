@@ -1,32 +1,65 @@
 package lrn.addressbook.model;
 
+import org.hibernate.annotations.Type;
+
+import javax.persistence.*;
 import java.io.File;
 import java.util.Objects;
 
+@Entity
+@Table(name = "addressbook")
 public class ContactData {
 
+    @Id
+    @Column(name = "id")
     private int id;
+    @Column(name = "firstname")
     private final String firstname;
+    @Column(name = "lastName")
     private final String lastName;
+    @Column(name = "nickname")
     private final String nick;
+    @Column(name = "company")
     private final String company;
+    @Column(name = "address")
+    @Type(type = "text")
     private final String address;
+    @Column(name = "home")
+    @Type(type = "text")
     private final String homePhoneNumber;
+    @Column(name = "mobile")
+    @Type(type = "text")
     private final String mobilePhoneNumber;
+    @Column(name = "work")
+    @Type(type = "text")
     private final String workPhoneNumber;
+    @Column(name = "email")
+    @Type(type = "text")
     private final String email;
+    @Transient
     private String group;
-
+    @Transient
+    private String photo;
     public File getPhoto() {
-        return photo;
+        return new File(photo);
     }
 
     public void setPhoto(File photo) {
-        this.photo = photo;
+        this.photo = photo.getPath();
     }
 
-    private File photo;
+    public ContactData() {
+        this.firstname = "";
+        this.lastName = "";
+        this.nick = "";
+        this.company = "";
+        this.address = "";
+        this.homePhoneNumber = "";
+        this.mobilePhoneNumber = "";
+        this.workPhoneNumber = "";
+        this.email = "";
 
+    }
 
     public ContactData(String firstname, String lastName, String nick, String company, String address, String homePhoneNumber, String mobilePhoneNumber,
                        String workPhoneNumber, String email, String group) {
@@ -60,7 +93,7 @@ public class ContactData {
 
     public ContactData(File photo, String firstname, String lastName, String nick, String address, String homePhoneNumber, String mobilePhoneNumber,
                        String workPhoneNumber, String email, String company, String group) {
-        this.photo = photo;
+        this.photo = photo.getPath();
         this.firstname = firstname;
         this.lastName = lastName;
         this.nick = nick;
