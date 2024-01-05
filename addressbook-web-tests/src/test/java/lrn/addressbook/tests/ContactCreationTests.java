@@ -18,7 +18,7 @@ public class ContactCreationTests extends TestBase{
       app.goTo().goToContactForm();
       File photo = new File("src/test/resources/pic.jpg");
       ContactData contactData = new ContactData(photo, "qwerty", "qwerty",
-              "qwerty", "11111", "111111", "111111", "222", "333", "222222ddddd", "qwerty");
+              "qwerty", "11111", "111111", "111111", "222", "333", "222222ddddd");
       app.contact().create(contactData);
       Assert.assertEquals(before.size() + 1, app.contact().getContactCount());
 

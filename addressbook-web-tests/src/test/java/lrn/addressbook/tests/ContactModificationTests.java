@@ -23,7 +23,7 @@ public class ContactModificationTests extends TestBase{
     Set<ContactData> before = new HashSet<>(app.db().contacts());
     ContactData modifiedContact = before.iterator().next();
     ContactData contactData = new ContactData(modifiedContact.getId(), "EEE", "www", "2222", "121ddd", "666",
-            "222", "333", "222", "qw", null);
+            "222", "333", "222", "qw");
     app.contact().modify(contactData);
     Assert.assertEquals(before.size(),app.contact().getContactCount());
 

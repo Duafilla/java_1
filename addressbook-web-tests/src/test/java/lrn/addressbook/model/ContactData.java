@@ -4,7 +4,9 @@ import org.hibernate.annotations.Type;
 
 import javax.persistence.*;
 import java.io.File;
+import java.util.HashSet;
 import java.util.Objects;
+import java.util.Set;
 
 @Entity
 @Table(name = "addressbook")
@@ -36,11 +38,12 @@ public class ContactData {
     @Column(name = "email")
     @Type(type = "text")
     private final String email;
-    @Transient
-    private String group;
     @Column(name = "photo")
     @Type(type = "text")
     private String photo;
+    @ManyToMany(fetch = FetchType.EAGER)
+    @JoinTable(name = "address_in_groups", joinColumns = @JoinColumn(name = "id"), inverseJoinColumns = @JoinColumn(name = "group_id"))
+    private Set<GroupData> groups = new HashSet<>();
     public File getPhoto() {
         if (photo == null || photo.equals("")) {
             return null;
@@ -79,11 +82,10 @@ public class ContactData {
         this.mobilePhoneNumber = mobilePhoneNumber;
         this.workPhoneNumber = workPhoneNumber;
         this.email = email;
-        this.group = group;
     }
 
     public ContactData(int id, String firstname, String lastName, String nick, String address, String homePhoneNumber, String mobilePhoneNumber,
-                       String workPhoneNumber, String email, String company, String group) {
+                       String workPhoneNumber, String email, String company) {
         this.id = id;
         this.firstname = firstname;
         this.lastName = lastName;
@@ -94,11 +96,10 @@ public class ContactData {
         this.workPhoneNumber = workPhoneNumber;
         this.email = email;
         this.company = company;
-        this.group = group;
     }
 
     public ContactData(File photo, String firstname, String lastName, String nick, String address, String homePhoneNumber, String mobilePhoneNumber,
-                       String workPhoneNumber, String email, String company, String group) {
+                       String workPhoneNumber, String email, String company) {
         this.photo = photo.getPath();
         this.firstname = firstname;
         this.lastName = lastName;
@@ -109,7 +110,6 @@ public class ContactData {
         this.workPhoneNumber = workPhoneNumber;
         this.email = email;
         this.company = company;
-        this.group = group;
     }
 
 
@@ -147,12 +147,13 @@ public class ContactData {
         return email;
     }
 
-    public String getGroup() {
-        return group;
-    }
 
     public int getId() {
         return id;
+    }
+
+    public Set<GroupData> getGroups() {
+        return groups;
     }
 
     public void setId(int id) {
@@ -173,7 +174,6 @@ public class ContactData {
                 ", mobilePhoneNumber='" + mobilePhoneNumber + '\'' +
                 ", workPhoneNumber='" + workPhoneNumber + '\'' +
                 ", email='" + email + '\'' +
-                ", group='" + group + '\'' +
                 '}';
     }
 

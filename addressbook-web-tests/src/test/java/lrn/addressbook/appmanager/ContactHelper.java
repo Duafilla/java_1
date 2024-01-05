@@ -65,7 +65,7 @@ public class ContactHelper extends HelperBase {
     String work = wd.findElement(By.name("work")).getAttribute("value");
     wd.navigate().back();
     return new ContactData(contactData.getId(),firstname,lastname, contactData.getNick(), contactData.getAddress(), home, mobile, work, contactData.getEmail(),
-            contactData.getCompany(), contactData.getGroup());
+            contactData.getCompany());
   }
 
   public int getContactCount() {
@@ -134,16 +134,16 @@ public class ContactHelper extends HelperBase {
       ContactData contact;
       switch (phones.length) {
         case 1: contact = new ContactData(id,firstName,lastName,null,null,phones[0],null,
-                null,null,null,null);
+                null,null,null);
           break;
         case 2: contact = new ContactData(id,firstName,lastName,null,null,phones[0],phones[1],
-                null,null,null,null);
+                null,null,null);
           break;
         case 3: contact = new ContactData(id,firstName,lastName,null,null,phones[0],phones[1],
-                phones[2],null,null,null);
+                phones[2],null,null);
           break;
         default: contact = new ContactData(id,firstName,lastName,null,null,null,null,
-                null,null,null,null);
+                null,null,null);
       }
 
       contactCache.add(contact);

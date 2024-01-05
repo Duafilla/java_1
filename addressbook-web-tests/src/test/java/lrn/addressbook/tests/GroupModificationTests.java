@@ -31,5 +31,7 @@ public class GroupModificationTests extends TestBase{
     before.remove(modifiedGroup);
     before.add(groupData);
     Assert.assertEquals(before, after);
+
+
   }
 }
