@@ -38,10 +38,16 @@ public class ContactData {
     private final String email;
     @Transient
     private String group;
-    @Transient
+    @Column(name = "photo")
+    @Type(type = "text")
     private String photo;
     public File getPhoto() {
-        return new File(photo);
+        if (photo == null || photo.equals("")) {
+            return null;
+        }
+        else {
+            return new File(photo);
+        }
     }
 
     public void setPhoto(File photo) {

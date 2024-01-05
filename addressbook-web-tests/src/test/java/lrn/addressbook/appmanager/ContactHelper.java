@@ -27,7 +27,9 @@ public class ContactHelper extends HelperBase {
   }
 
   public void fillContactForm(ContactData contactData) {
-    attach(By.name("photo"), contactData.getPhoto());
+    if (contactData.getPhoto() != null) {
+      attach(By.name("photo"), contactData.getPhoto());
+    }
     type(By.name("firstname"), contactData.getFirstname());
     type(By.name("lastname"), contactData.getLastName());
     type(By.name("nickname"), contactData.getNick());

@@ -5,6 +5,7 @@ import org.testng.Assert;
 import org.testng.annotations.Test;
 
 import java.io.File;
+import java.util.HashSet;
 import java.util.Set;
 
 public class ContactCreationTests extends TestBase{
@@ -13,7 +14,7 @@ public class ContactCreationTests extends TestBase{
   public void testContactCreation() throws Exception {
 
       app.goTo().goToHomePage();
-      Set<ContactData> before = app.contact().all();
+      Set<ContactData> before = new HashSet<>(app.db().contacts());
       app.goTo().goToContactForm();
       File photo = new File("src/test/resources/pic.jpg");
       ContactData contactData = new ContactData(photo, "qwerty", "qwerty",
@@ -21,7 +22,7 @@ public class ContactCreationTests extends TestBase{
       app.contact().create(contactData);
       Assert.assertEquals(before.size() + 1, app.contact().getContactCount());
 
-      Set<ContactData> after = app.contact().all();
+      Set<ContactData> after = new HashSet<>(app.db().contacts());
       contactData.setId(after.stream().mapToInt((ContactData::getId)).max().getAsInt());
       before.add(contactData);
       Assert.assertEquals(before, after);
