@@ -15,6 +15,7 @@ import org.testng.annotations.Test;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
+import java.util.HashSet;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Set;
@@ -61,11 +62,11 @@ public class GroupCreationTests extends TestBase {
 
     logger.info("Start test testGroupCreation");
     app.goTo().groupPage();
-    Set<GroupData> before = app.group().all();
+    Set<GroupData> before = new HashSet<>(app.db().groups());
     app.group().create(groupData);
     Assert.assertEquals(app.group().getGroupCount(), before.size() + 1);
 
-    Set<GroupData> after = app.group().all();
+    Set<GroupData> after = new HashSet<>(app.db().groups());
     groupData.setId(after.stream().mapToInt((GroupData::getId)).max().getAsInt());
     before.add(groupData);
     Assert.assertEquals(before, after);
@@ -77,12 +78,12 @@ public class GroupCreationTests extends TestBase {
   public void testBadGroupCreation() {
 
     app.goTo().groupPage();
-    Set<GroupData> before = app.group().all();
+    Set<GroupData> before = new HashSet<>(app.db().groups());
     GroupData groupData = new GroupData("112'", "111", "111");
     app.group().create(groupData);
     Assert.assertEquals(app.group().getGroupCount(), before.size());
 
-    Set<GroupData> after = app.group().all();
+    Set<GroupData> after = new HashSet<>(app.db().groups());
     Assert.assertEquals(before, after);
 
   }
