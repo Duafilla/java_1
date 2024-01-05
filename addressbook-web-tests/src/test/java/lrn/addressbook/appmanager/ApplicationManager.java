@@ -21,6 +21,7 @@ public class ApplicationManager {
   private GroupHelper groupHelper;
   private SessionHelper sessionHelper;
   private String browser;
+  private DbHelper dbHelper;
 
   public ApplicationManager(String browser) {
     this.browser = browser;
@@ -34,6 +35,8 @@ public class ApplicationManager {
     properties.load(new FileReader(new File(String.format("src/test/resources/%s.properties", target))));
     System.setProperty("webdriver.chrome.driver", "c:\\windows\\system32\\chromedriver.exe");
     System.setProperty("webdriver.firefox.driver", "c:\\windows\\system32\\geckodriver.exe"); /*вообще можно эту строку удалить т.к. в else есть ссылка на драйвер*/
+
+    dbHelper = new DbHelper();
 
     if(browser == BrowserType.CHROME) {
       wd = new ChromeDriver();
@@ -70,5 +73,9 @@ public class ApplicationManager {
 
   public ContactHelper contact() {
     return contactHelper;
+  }
+
+  public DbHelper db() {
+    return dbHelper;
   }
 }
